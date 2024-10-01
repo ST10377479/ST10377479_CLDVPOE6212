@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Profiles - ABCRetailApp</title>
+    <!-- Link to Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General styling for the body */
+        body {
+            font-family: 'Roboto', sans-serif; /* Font style */
+            background-color: #6495ED; /* Cornflower blue background */
+            margin: 0; /* Remove default margin */
+            padding-top: 70px; /* Padding to accommodate fixed navbar */
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #3a506b; /* Dark blue background for navbar */
+            padding: 15px 20px; /* Padding inside the navbar */
+            display: flex; /* Flexbox layout */
+            justify-content: center; /* Center-align content */
+            position: fixed; /* Fixed position at the top */
+            top: 0; /* Align to the top */
+            width: 100%; /* Full width */
+            z-index: 1000; /* Ensure navbar is above other content */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for separation */
+        }
+
+        /* Navbar brand styling */
+        .navbar-brand {
+            font-size: 2rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            color: #ecf0f1; /* Light text color */
+            text-align: center; /* Center text */
+        }
+
+        /* Container styling */
+        .container {
+            max-width: 1200px; /* Maximum width for the container */
+            margin: auto; /* Center-align container */
+            padding: 20px; /* Padding inside the container */
+        }
+
+        /* Heading styling */
+        h2 {
+            color: #ffffff; /* White text color */
+            text-align: center; /* Center-align text */
+            margin-bottom: 40px; /* Space below the heading */
+            font-size: 3rem; /* Larger font size */
+            font-weight: 700; /* Bold text */
+            text-transform: uppercase; /* Uppercase text */
+            letter-spacing: 1.5px; /* Spacing between letters */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Shadow effect for text */
+        }
+
+        /* Styling for customer cards */
+        .customer-card {
+            background-color: #ffffff; /* White background */
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Shadow effect for card */
+            margin-bottom: 30px; /* Space below each card */
+            padding: 25px; /* Padding inside the card */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transitions */
+            border: 1px solid #e0e0e0; /* Light gray border */
+        }
+
+            /* Hover effect for customer cards */
+            .customer-card:hover {
+                transform: translateY(-8px); /* Lift the card on hover */
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+            }
+
+            /* Styling for card titles (customer names) */
+            .customer-card h5 {
+                color: #007bff; /* Blue color for names */
+                font-size: 1.5rem; /* Font size for names */
+                margin-bottom: 10px; /* Space below the title */
+            }
+
+            /* Styling for card text (customer details) */
+            .customer-card p {
+                margin: 8px 0; /* Vertical margin */
+                font-size: 1rem; /* Font size for details */
+                color: #333333; /* Dark text color */
+            }
+
+        /* Styling for action buttons */
+        .actions {
+            margin-top: 20px; /* Space above the actions section */
+            text-align: right; /* Align actions to the right */
+        }
+
+        /* General button styling */
+        .btn {
+            border-radius: 6px; /* Rounded corners for buttons */
+            padding: 10px 20px; /* Padding inside the button */
+            font-size: 14px; /* Font size for buttons */
+            font-weight: 500; /* Medium weight */
+            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transitions */
+            display: flex; /* Flexbox layout for buttons */
+            align-items: center; /* Center align items vertically */
+            justify-content: center; /* Center align items horizontally */
+        }
+
+        /* Primary button styling */
+        .btn-primary {
+            background-color: #007bff; /* Blue background */
+            border-color: #007bff; /* Matching border color */
+        }
+
+            /* Hover state for primary button */
+            .btn-primary:hover {
+                background-color: #0056b3; /* Darker blue on hover */
+                transform: scale(1.05); /* Slightly enlarge button on hover */
+            }
+
+        /* Danger button styling (for delete actions) */
+        .btn-danger {
+            background-color: #dc3545; /* Red background */
+            border-color: #dc3545; /* Matching border color */
+        }
+
+            /* Hover state for danger button */
+            .btn-danger:hover {
+                background-color: #c82333; /* Darker red on hover */
+                transform: scale(1.05); /* Slightly enlarge button on hover */
+            }
+
+        /* Styling for icons inside buttons */
+        .btn i {
+            margin-right: 8px; /* Space between icon and text */
+        }
+
+        /* Styling for the 'Add New Customer' button */
+        .add-customer-btn {
+            display: block; /* Make button a block element */
+            width: 100%; /* Full width */
+            max-width: 200px; /* Maximum width */
+            margin: 40px auto 0; /* Center align button and add margin */
+            background-color: #28a745; /* Green background */
+            border-color: #28a745; /* Matching border color */
+            color: #ffffff; /* White text color */
+        }
+
+            /* Hover state for 'Add New Customer' button */
+            .add-customer-btn:hover {
+                background-color: #218838; /* Darker green on hover */
+                transform: scale(1.05); /* Slightly enlarge button on hover */
+            }
+    </style>
+    <script>
+        /* Function to confirm deletion action */
+        function confirmDelete(event) {
+            if (!confirm('Are you sure you want to delete this customer?')) {
+                event.preventDefault(); // Prevent form submission if not confirmed
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Container for main content -->
+    <div class="container">
+        <!-- Page heading -->
+        <h2>Customer Profiles</h2>
+
+        <!-- Row to hold customer cards -->
+        <div class="row">
+            @foreach (var customer in Model)
+            {
+                <!-- Column for each customer card -->
+                <div class="col-md-4">
+                    <!-- Customer card -->
+                    <div class="customer-card">
+                        <!-- Customer name -->
+                        <h5>@customer.FirstName @customer.Surname</h5>
+                        <!-- Customer details -->
+                        <p><strong>Email:</strong> @customer.Email</p>
+                        <!-- Actions section -->
+                        <div class="actions">
+                            <!-- Form for deleting a customer -->
+                            <form asp-action="Delete" method="post" style="display:inline;" onsubmit="confirmDelete(event)">
+                                <!-- Hidden inputs for customer identifiers -->
+                                <input type="hidden" name="partitionKey" value="@customer.PartitionKey" />
+                                <input type="hidden" name="rowKey" value="@customer.RowKey" />
+                                <!-- Delete button -->
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Button to add a new customer -->
+        <a href="@Url.Action("Create")" class="btn btn-primary add-customer-btn">Add New Customer</a>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

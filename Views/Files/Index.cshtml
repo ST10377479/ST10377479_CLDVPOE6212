@@ -1,0 +1,177 @@
+﻿@model IEnumerable<ABCRetailApp.Models.ContractModel>
+
+@{
+    ViewData["Title"] = "File Management";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <!-- Link to Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General styling for the body */
+        body {
+            font-family: 'Roboto', sans-serif; /* Font style */
+            background-color: #6495ED; /* Cornflower blue background */
+            margin: 0; /* Remove default margin */
+            padding-top: 70px; /* Padding to make room for the fixed navbar */
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #3a506b; /* Complementary blue color */
+            padding: 15px 20px; /* Padding inside the navbar */
+            display: flex; /* Flexbox for centering content */
+            justify-content: center; /* Center-align content */
+            position: fixed; /* Fixed position to stay at the top */
+            top: 0; /* Align to the top */
+            width: 100%; /* Full width */
+            z-index: 1000; /* Ensure it stays above other content */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow effect for visual separation */
+        }
+
+        /* Navbar brand styling */
+        .navbar-brand {
+            font-size: 2rem; /* Larger font size */
+            font-weight: bold; /* Bold text */
+            color: #ecf0f1; /* Light text color */
+            text-align: center; /* Center text */
+        }
+
+        /* Container styling */
+        .container {
+            max-width: 1200px; /* Maximum width */
+            margin: auto; /* Center-align container */
+            padding: 20px; /* Padding inside the container */
+        }
+
+        /* Heading styling */
+        h2 {
+            color: #ffffff; /* White text color */
+            text-align: center; /* Center-align text */
+            margin-bottom: 40px; /* Space below the heading */
+            font-size: 2.5rem; /* Larger font size */
+            font-weight: 700; /* Bold text */
+            text-transform: uppercase; /* Uppercase text */
+            letter-spacing: 1.5px; /* Spacing between letters */
+        }
+
+        /* Upload form styling */
+        .upload-form {
+            background-color: #ffffff; /* White background */
+            border-radius: 8px; /* Rounded corners */
+            padding: 20px; /* Padding inside the form */
+            margin-bottom: 40px; /* Space below the form */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        }
+
+            /* File input styling */
+            .upload-form input[type="file"] {
+                margin-bottom: 10px; /* Space below file input */
+                color: #333; /* Dark text color for better visibility */
+            }
+
+            /* Submit button styling */
+            .upload-form button {
+                background-color: #28a745; /* Green background */
+                border-color: #28a745; /* Matching border color */
+                color: #fff; /* White text color */
+                padding: 10px 20px; /* Padding inside the button */
+                font-size: 1rem; /* Font size */
+                border-radius: 5px; /* Rounded corners */
+                transition: background-color 0.3s ease; /* Smooth color transition */
+            }
+
+                /* Hover state for the button */
+                .upload-form button:hover {
+                    background-color: #218838; /* Darker green on hover */
+                    border-color: #1e7e34; /* Darker border on hover */
+                }
+
+        /* File card styling */
+        .file-card {
+            background-color: #ffffff; /* White background */
+            border-radius: 8px; /* Rounded corners */
+            padding: 20px; /* Padding inside the card */
+            margin-bottom: 20px; /* Space below the card */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            display: flex; /* Flexbox for layout */
+            justify-content: space-between; /* Space between elements */
+            align-items: center; /* Center-align items vertically */
+        }
+
+            /* Styling for file details */
+            .file-card .file-details {
+                flex: 1; /* Take up remaining space */
+            }
+
+            /* Styling for file actions */
+            .file-card .file-actions a {
+                color: #007bff; /* Blue color for links */
+                text-decoration: none; /* Remove underline */
+                font-weight: 500; /* Medium weight */
+                margin-left: 20px; /* Space between actions */
+                transition: color 0.3s ease; /* Smooth color transition */
+            }
+
+                /* Hover state for file action links */
+                .file-card .file-actions a:hover {
+                    color: #0056b3; /* Darker blue on hover */
+                }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation bar (optional if not used here) -->
+    <!--
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">ABCRetailApp</a>
+    </nav>
+    -->
+
+    <div class="container">
+        <!-- Page Heading -->
+        <h2>@ViewData["Title"]</h2>
+
+        <!-- Upload Form -->
+        <div class="upload-form">
+            <!-- Form for uploading files -->
+            <form asp-controller="Files" asp-action="Upload" method="post" enctype="multipart/form-data">
+                <!-- File input field -->
+                <input type="file" name="file" />
+                <!-- Submit button -->
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+
+        <!-- List of Files -->
+        <div class="file-list">
+            <!-- Loop through each file in the model and display -->
+            @foreach (var file in Model)
+            {
+                <div class="file-card">
+                    <div class="file-details">
+                        <!-- Display file name and details -->
+                        <h5>@file.FileName</h5>
+                        <p>Size: @file.DisplaySize | Uploaded: @file.UploadedDate?.ToString("yyyy/MM/dd")</p>
+                    </div>
+                    <div class="file-actions">
+                        <!-- Link to download the file -->
+                        <a asp-controller="Files" asp-action="Download" asp-route-fileName="@file.FileName">Download</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+﻿@model IEnumerable<ABCRetailApp.Models.Order>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - ABCRetailApp</title>
+    <!-- Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Styling for the body */
+        body {
+            background-color: cornflowerblue; /* Light blue background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font style */
+            color: #333; /* Text color */
+            margin: 0; /* Remove default margin */
+            padding-top: 70px; /* Space for the fixed navbar */
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #3a506b; /* Dark blue background */
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure navbar is above other content */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        /* Navbar brand styling */
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ecf0f1; /* Light text color */
+            text-align: center;
+        }
+
+        /* Container styling for the card */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* Card styling */
+        .card {
+            border-radius: 8px; /* Rounded corners */
+        }
+
+        .card-header {
+            border-radius: 8px 8px 0 0; /* Rounded top corners */
+            background-color: #007bff; /* Blue background */
+            color: #fff; /* White text color */
+        }
+
+        /* Primary button styling */
+        .btn-primary {
+            background-color: #007bff; /* Blue color */
+            border-color: #007bff;
+        }
+
+            /* Primary button hover effect */
+            .btn-primary:hover {
+                background-color: #0056b3; /* Darker blue on hover */
+                border-color: #004085;
+            }
+
+        /* Large button styling */
+        .btn-lg {
+            padding: 10px 20px; /* Larger padding */
+            font-size: 18px; /* Larger font size */
+            border-radius: 5px; /* Slightly rounded corners */
+        }
+
+        /* Table styling */
+        .table {
+            margin-top: 20px; /* Space above the table */
+            width: 100%; /* Full width */
+            border-radius: 8px; /* Rounded corners */
+        }
+
+            /* Table header and cell alignment */
+            .table th, .table td {
+                text-align: center; /* Center-align text */
+                vertical-align: middle; /* Center-align content vertically */
+            }
+
+            .table thead th {
+                background-color: #e9ecef; /* Light gray background for header */
+            }
+
+        /* Hover effect for table rows */
+        .table-hover tbody tr:hover {
+            background-color: #f1f1f1; /* Light gray on hover */
+        }
+
+        /* Alert styling */
+        .alert-success {
+            font-size: 16px; /* Font size for alert */
+            background-color: #d4edda; /* Light green background */
+            border-color: #c3e6cb; /* Light green border */
+            color: #155724; /* Dark green text color */
+        }
+
+        /* Heading styling */
+        h2 {
+            font-weight: 600; /* Slightly bold font weight */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main container for content -->
+    <div class="container mt-5">
+        <!-- Card to display the list of orders -->
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0">Orders</h2>
+            </div>
+            <div class="card-body">
+                <!-- Display success message if available -->
+                @if (TempData["OrderSuccess"] != null)
+                {
+                    <div class="alert alert-success">
+                        @TempData["OrderSuccess"]
+                    </div>
+                }
+
+                <!-- Button to create a new order -->
+                <div class="text-right mb-3">
+                    <a href="@Url.Action("Create", "Order")" class="btn btn-primary btn-lg">
+                        <i class="fas fa-plus-circle"></i> Create New Order
+                    </a>
+                </div>
+
+                <!-- Table to display orders -->
+                <table class="table table-hover table-bordered bg-white">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Order Date</th>
+                            <th>Customer</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Loop through each order in the model -->
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@order.OrderDate.ToString("yyyy/MM/dd HH:mm:ss")</td> <!-- Display order date -->
+                                <td>@order.CustomerId</td> <!-- Placeholder for Customer Name -->
+                                <td>@order.ProductId</td> <!-- Placeholder for Product Name -->
+                                <td>@order.Quantity</td> <!-- Display quantity -->
+                                <td>@order.Price.ToString("C")</td> <!-- Display price in currency format -->
+                                <td>@order.Status</td> <!-- Display order status -->
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

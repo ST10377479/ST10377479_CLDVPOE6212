@@ -1,0 +1,230 @@
+﻿@model IEnumerable<ABCRetailApp.Models.Product>
+
+@{
+    ViewData["Title"] = "Product List";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - ABCRetailApp</title>
+    <!-- Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Styling for the body */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #6495ED; /* Cornflower blue background */
+            margin: 0;
+            padding-top: 70px; /* Space for the fixed navbar */
+        }
+
+        /* Fixed navbar styling */
+        .navbar {
+            background-color: #3a506b; /* Dark blue color */
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure navbar is above other content */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        /* Navbar brand styling */
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ecf0f1; /* Light color for text */
+            text-align: center;
+        }
+
+        /* Container for page content */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* Main heading styling */
+        h1 {
+            color: #ffffff; /* White color for heading */
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Alert styling */
+        .alert {
+            margin-bottom: 20px; /* Space below alerts */
+        }
+
+        /* Product card styling */
+        .product-card {
+            border: 1px solid #dee2e6; /* Light border */
+            border-radius: 0.5rem;
+            padding: 15px;
+            background-color: #fff; /* White background for cards */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            text-align: center;
+        }
+
+            /* Product image styling */
+            .product-card img {
+                border-radius: 0.5rem; /* Rounded corners for image */
+                width: 100%;
+                max-width: 400px; /* Restrict max width */
+                height: 300px; /* Fixed height */
+                object-fit: cover; /* Maintain aspect ratio */
+                margin-bottom: 15px;
+            }
+
+        /* Product title styling */
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #343a40; /* Dark gray color */
+            margin-bottom: 10px;
+        }
+
+        /* Product description styling */
+        .product-description {
+            color: #6c757d; /* Muted gray color */
+            margin-bottom: 15px;
+        }
+
+        /* Product price styling */
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #007bff; /* Blue color for price */
+            margin-bottom: 15px;
+        }
+
+        /* Button group styling */
+        .btn-group .btn {
+            margin: 5px;
+            border-radius: 4px; /* Less rounded corners */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            font-weight: 500; /* Slightly thicker text */
+            padding: 8px 16px; /* Adjust padding */
+            transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+        }
+
+        /* Info button styling */
+        .btn-info {
+            background-color: #6c757d; /* Muted gray */
+            border-color: #6c757d;
+            color: #ffffff; /* White text */
+        }
+
+            /* Info button hover effect */
+            .btn-info:hover {
+                background-color: #5a6268; /* Darker gray on hover */
+                border-color: #545b62;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Larger shadow */
+            }
+
+        /* Danger button styling */
+        .btn-danger {
+            background-color: #dc3545; /* Red color for delete */
+            border-color: #dc3545;
+        }
+
+            /* Danger button hover effect */
+            .btn-danger:hover {
+                background-color: #c82333; /* Darker red on hover */
+                border-color: #bd2130;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Larger shadow */
+            }
+
+        /* Primary button styling */
+        .btn-primary {
+            background-color: #007bff; /* Blue color for primary actions */
+            border-color: #007bff;
+        }
+
+            /* Primary button hover effect */
+            .btn-primary:hover {
+                background-color: #0056b3; /* Darker blue on hover */
+                border-color: #004085;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Larger shadow */
+            }
+    </style>
+</head>
+
+<body>
+
+    <!-- Main container for content -->
+    <div class="container">
+        <!-- Page heading -->
+        <h1>@ViewData["Title"]</h1>
+
+        <!-- Display success message if available -->
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <!-- Display error message if available -->
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <!-- Button to create a new product -->
+        <div class="d-flex justify-content-center mb-4">
+            <a asp-action="Create" class="btn btn-primary btn-lg">Create New Product</a>
+        </div>
+
+        <!-- Product cards grid -->
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
+                    <!-- Individual product card -->
+
+                    <div class="product-card">
+                        @if (!string.IsNullOrEmpty(item.ImageUrl))
+                        {
+                            <img src="@item.ImageUrl" alt="@item.ProductName" class="img-fluid" />
+                        }
+                        <!-- Product details -->
+                        <div class="product-title">@item.ProductName</div>
+                        <div class="product-description">@item.Description</div>
+                        <div class="product-price">@item.Price.ToString("C")</div>
+                        <!-- Action buttons -->
+                        <div class="btn-group" role="group" aria-label="Actions">
+                            <!-- Details button -->
+                            <a asp-action="Details" asp-route-rowKey="@item.RowKey" class="btn btn-info">
+                                <i class="fas fa-info-circle"></i> Details
+                            </a>
+                            <!-- Delete button -->
+                            <a asp-action="Delete" asp-route-rowKey="@item.RowKey" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

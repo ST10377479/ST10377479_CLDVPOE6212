@@ -1,0 +1,146 @@
+﻿@model ABCRetailApp.Models.OrderCreateViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Order - ABCRetailApp</title>
+    <!-- Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        /* Styling for the body */
+        body {
+            background-color: cornflowerblue; /* Light blue background */
+            color: #fff; /* White text color */
+            font-family: 'Roboto', sans-serif; /* Font style */
+            padding: 40px; /* Padding around the content */
+        }
+
+        /* Heading styling */
+        h2 {
+            text-align: center; /* Center-align the heading */
+            margin-bottom: 40px; /* Space below the heading */
+            font-size: 2.5rem; /* Larger font size */
+            color: #fff; /* White text color */
+            font-weight: 700; /* Bold text */
+        }
+
+        /* Card styling */
+        .card {
+            background-color: #f8f9fa; /* Light gray background */
+            color: #333; /* Dark text color */
+            border-radius: 10px; /* Rounded corners */
+            padding: 30px; /* Padding inside the card */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            max-width: 600px; /* Maximum width of the card */
+            margin: 0 auto; /* Center-align the card horizontally */
+        }
+
+        /* Form group styling */
+        .form-group label {
+            color: #333; /* Dark text color for labels */
+            font-weight: 600; /* Bold text */
+            margin-bottom: 10px; /* Space below the label */
+            display: block; /* Block display to ensure labels are on new lines */
+        }
+
+        /* Form control styling */
+        .form-control {
+            background-color: #fff; /* White background */
+            color: #333; /* Dark text color */
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 5px; /* Slightly rounded corners */
+            padding: 10px; /* Padding inside input fields */
+            font-size: 1rem; /* Font size for input text */
+            margin-bottom: 20px; /* Space below input fields */
+            transition: border-color 0.3s ease; /* Smooth transition for border color on focus */
+        }
+
+            /* Focus state for form controls */
+            .form-control:focus {
+                border-color: #007bff; /* Blue border color on focus */
+                outline: none; /* Remove default outline */
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue shadow effect */
+            }
+
+        /* Primary button styling */
+        .btn-primary {
+            background-color: #007bff; /* Blue background */
+            border-color: #007bff; /* Blue border */
+            color: #fff; /* White text color */
+            padding: 10px 20px; /* Padding inside the button */
+            font-size: 1.1rem; /* Larger font size */
+            border-radius: 5px; /* Slightly rounded corners */
+            width: 100%; /* Full width */
+            transition: background-color 0.3s ease; /* Smooth transition for background color on hover */
+        }
+
+            /* Hover state for primary button */
+            .btn-primary:hover {
+                background-color: #0056b3; /* Darker blue on hover */
+                border-color: #0056b3; /* Darker border on hover */
+            }
+
+        /* Styling for validation error messages */
+        .text-danger {
+            color: #dc3545; /* Red text color for errors */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main heading for the page -->
+    <h2>Create Order</h2>
+
+    <!-- Card container for the form -->
+    <div class="card">
+        <!-- Form for creating a new order -->
+        <form asp-action="Create" method="post">
+            <!-- Customer selection -->
+            <div class="form-group">
+                <label asp-for="SelectedCustomerId" class="control-label">Customer</label>
+                <select asp-for="SelectedCustomerId" asp-items="Model.Customers" class="form-control"></select>
+                <span asp-validation-for="SelectedCustomerId" class="text-danger"></span>
+            </div>
+
+            <!-- Product selection -->
+            <div class="form-group">
+                <label asp-for="SelectedProductId" class="control-label">Product</label>
+                <select asp-for="SelectedProductId" asp-items="Model.Products" class="form-control"></select>
+                <span asp-validation-for="SelectedProductId" class="text-danger"></span>
+            </div>
+
+            <!-- Quantity input -->
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label">Quantity</label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+
+            <!-- Price input -->
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Price</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+
+            <!-- Order Date input -->
+            <div class="form-group">
+                <label asp-for="OrderDate" class="control-label">Order Date</label>
+                <input asp-for="OrderDate" type="date" class="form-control" />
+                <span asp-validation-for="OrderDate" class="text-danger"></span>
+            </div>
+
+            <!-- Submit button -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

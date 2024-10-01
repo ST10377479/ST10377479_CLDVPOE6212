@@ -1,0 +1,153 @@
+﻿@model ABCRetailApp.Models.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - ABCRetailApp</title>
+    <!-- Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom styling for the body */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #6495ED; /* Cornflower blue background */
+            padding: 20px;
+        }
+
+        /* Container for page content */
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Main heading styling */
+        h1 {
+            color: black; /* Black color for the heading */
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* Product title styling */
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: black; /* Black color for product title */
+            margin-bottom: 10px;
+        }
+
+        /* Product price styling */
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #007bff; /* Blue color for price */
+            margin-bottom: 15px;
+        }
+
+        /* Container styling for product image */
+        .product-image-container img {
+            max-width: 300px; /* Restrict the size of the image */
+            height: auto;
+        }
+
+        /* Definition list styling */
+        dl.row {
+            margin-bottom: 20px;
+        }
+
+        /* Term in definition list styling */
+        dt {
+            font-weight: bold;
+            color: black; /* Black color for terms */
+        }
+
+        /* Description in definition list styling */
+        dd {
+            color: deepskyblue; /* Sky blue color for descriptions */
+            margin-bottom: 10px;
+        }
+
+        /* Secondary button styling */
+        .btn-secondary {
+            background-color: black;
+            border-color: black;
+            color: #ffffff;
+            margin-top: 20px;
+        }
+
+            /* Secondary button hover effect */
+            .btn-secondary:hover {
+                background-color: black;
+                border-color: black;
+                color: #ffffff;
+            }
+
+        /* Center-aligned text */
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Main container for content -->
+    <div class="container">
+        <!-- Page title with info circle icon -->
+        <div class="text-center">
+            <h1><i class="fas fa-info-circle"></i> @ViewData["Title"]</h1>
+        </div>
+
+        <!-- Product details section -->
+        <div class="mt-4">
+            <!-- Product name with tag icon -->
+            <div class="product-title"><i class="fas fa-tag"></i> @Model.ProductName</div>
+            <hr />
+            <dl class="row">
+                <!-- Product description -->
+                <dt class="col-sm-3">Description</dt>
+                <dd class="col-sm-9">@Model.Description</dd>
+
+                <!-- Product price formatted as currency -->
+                <dt class="col-sm-3">Price</dt>
+                <dd class="col-sm-9 product-price">@Model.Price.ToString("C")</dd>
+
+                <!-- Product image -->
+                <dt class="col-sm-3">Image</dt>
+                <dd class="col-sm-9">
+                    <div class="product-image-container">
+                        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                        {
+                            <img src="@Model.ImageUrl" alt="@Model.ProductName" />
+                        }
+                    </div>
+                </dd>
+            </dl>
+            <!-- Back to list button -->
+            <div class="text-center">
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript and dependencies for Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

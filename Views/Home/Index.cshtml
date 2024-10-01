@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - ABC Retail</title>
+    <!-- Bootstrap CSS for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        /* Basic styling for the body */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: cornflowerblue; /* Page background color */
+            color: #495057; /* Default text color */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #3a506b; /* Blue shade that complements cornflower blue */
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center; /* Center the brand name */
+        }
+
+        .navbar-brand {
+            font-size: 2rem; /* Large font size for the brand */
+            font-weight: bold;
+            color: #ecf0f1; /* Light color for contrast */
+            text-align: center;
+        }
+
+        /* Hero section styling */
+        .hero {
+            background: url('https://i.pinimg.com/564x/e5/bb/91/e5bb9109caefc59388cedf276bc3cbc8.jpg') no-repeat center center fixed;
+            background-size: cover; /* Ensure background image covers entire section */
+            color: #ecf0f1; /* Light text color for readability */
+            min-height: 70vh; /* Hero section height */
+            padding: 60px 20px; /* Padding inside the hero section */
+            text-align: center; /* Center align text */
+            position: relative;
+            margin-bottom: 30px; /* Space for footer */
+        }
+
+        /* Content within the hero section */
+        .hero-content {
+            position: relative;
+            z-index: 2; /* Ensure content appears over the background image */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content vertically and horizontally */
+            justify-content: center;
+            height: 100%;
+        }
+
+        /* Main heading in the hero section */
+        .hero h1 {
+            font-size: 3rem; /* Large font size */
+            font-weight: bold;
+            color: #ecf0f1; /* Light color for text */
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Add shadow for readability */
+        }
+
+        /* Paragraph text in the hero section */
+        .hero p {
+            font-size: 1.25rem; /* Adjusted font size */
+            line-height: 1.5;
+            font-weight: 300;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Add shadow for readability */
+            color: #ecf0f1;
+            max-width: 700px; /* Limit width of text for readability */
+            margin: 0 auto;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: #5a8eb1; /* Lighter shade of blue */
+            border: none;
+            padding: 15px 20px;
+            font-size: 1rem; /* Adjusted font size */
+            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+            margin: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+            text-transform: uppercase; /* Capitalize button text */
+            color: #ecf0f1; /* Light color for text */
+            width: 150px; /* Fixed width */
+            height: 50px; /* Fixed height */
+            display: flex;
+            align-items: center; /* Center align text within button */
+            justify-content: center;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 25px; /* Rounded corners */
+        }
+
+            /* Button hover effect */
+            .btn-primary:hover {
+                background: #7aadd1; /* Brighter shade of blue on hover */
+                transform: scale(1.05); /* Slightly enlarge button on hover */
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Enhance shadow on hover */
+            }
+
+        /* Button container in the hero section */
+        .hero-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two buttons per row */
+            gap: 20px; /* Space between buttons */
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        /* Footer styling */
+        .footer {
+            padding: 20px;
+            background-color: #3a506b; /* Match navbar color */
+            color: #ecf0f1; /* Light text color */
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            /* Footer text styling */
+            .footer p {
+                margin-bottom: 10px;
+                font-size: 0.875rem; /* Small font size */
+            }
+
+            /* Social media icons in the footer */
+            .footer .social-icons {
+                margin-top: 10px;
+            }
+
+                /* Individual social media icon styling */
+                .footer .social-icons a {
+                    color: #ecf0f1; /* Light icon color */
+                    margin: 0 10px; /* Space between icons */
+                    font-size: 1.5rem; /* Larger icon size */
+                    text-decoration: none;
+                }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar at the top of the page -->
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">ABC Retail</a>
+    </nav>
+
+    <!-- Hero section with background image and introductory text -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Welcome to ABC Retail</h1>
+            <p>ABC Retail is revolutionizing online shopping with adaptable cloud solutions that handle peak seasons effectively, streamline order processing, and enhance customer satisfaction through real-time analytics and reliable communication systems.</p>
+            <!-- Button group linking to different pages -->
+            <div class="hero-buttons">
+                <a href="@Url.Action("Index","Files")" class="btn btn-primary">Go to Files</a>
+                <a href="@Url.Action("Index","Product")" class="btn btn-primary">Go to Products</a>
+                <a href="@Url.Action("Index","Order")" class="btn btn-primary">Go to Orders</a>
+                <a href="@Url.Action("Index","Customer")" class="btn btn-primary">Go to Customers</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer section with copyright and social media icons -->
+    <footer class="footer">
+        <p>&copy; 2024 ABC Retail. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="#"><i class="bi bi-facebook"></i></a>
+            <a href="#"><i class="bi bi-twitter"></i></a>
+            <a href="#"><i class="bi bi-linkedin"></i></a>
+        </div>
+    </footer>
+
+    <!-- jQuery and Bootstrap JS for interactive elements -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
